@@ -69,15 +69,31 @@ section {
 
 .photo-gallery {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     flex-wrap: wrap;
+    gap: 15px;
 }
 
+/* Effet sur les images */
 .photo-gallery img {
     max-width: 30%;
     height: auto;
     border-radius: 8px;
     margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre portée */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.photo-gallery img:hover {
+    transform: scale(1.1); /* Zoom au survol */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Optimisation pour mobiles */
+@media screen and (max-width: 768px) {
+    .photo-gallery img {
+        max-width: 80%; /* Les images prennent plus d’espace sur petits écrans */
+    }
 }
 
 /* Formulaire de contact */
@@ -109,6 +125,7 @@ section {
     background-color: #218838;
 }
 
+/* Pied de page */
 footer {
     text-align: center;
     padding: 20px;
