@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <title>JANAN RÉNOVATION | L'Excellence Technique • Avignon</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;700;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #c5a059; --dark: #0a0a0a; --grey: #f8f8f8; --white: #ffffff;
+    }
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Montserrat', sans-serif; color: #333; background: var(--white); overflow-x: hidden; line-height: 1.8; scroll-behavior: smooth; }
+
+    /* --- NAVIGATION --- */
+    nav { position: fixed; width: 100%; padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; z-index: 5000; background: rgba(255,255,255,0.98); border-bottom: 1px solid #eee; backdrop-filter: blur(10px); }
+    .logo { font-family: 'Playfair Display'; font-size: 1.8rem; font-weight: 700; color: var(--dark); text-decoration: none; letter-spacing: 5px; }
+    .nav-links { display: flex; gap: 20px; align-items: center; }
+    .nav-link { text-decoration: none; color: var(--dark); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+    .nav-btn { background: var(--dark); color: white; padding: 12px 25px; border-radius: 2px; text-decoration: none; font-weight: 700; font-size: 0.7rem; text-transform: uppercase; }
+
+    /* --- HERO --- */
+    .hero {
+      height: 80vh;
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.3)), 
+                  url('https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'); 
+      background-size: cover; background-position: center;
+      display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center;
+    }
+    .hero h1 { font-family: 'Playfair Display'; font-size: clamp(2.5rem, 8vw, 5rem); line-height: 1.1; margin-bottom: 20px; }
+    .hero p { text-transform: uppercase; letter-spacing: 8px; font-size: 0.8rem; color: var(--primary); }
+
+    /* --- SECTION TECHNIQUE --- */
+    .technical { padding: 100px 10%; background: var(--white); }
+    .label { color: var(--primary); font-weight: 700; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 5px; margin-bottom: 50px; display: block; text-align: center; }
+    
+    .tech-row { display: flex; gap: 60px; align-items: center; margin-bottom: 100px; }
+    .tech-row.reverse { flex-direction: row-reverse; }
+    .tech-text { flex: 1; }
+    .tech-text h3 { font-family: 'Playfair Display'; font-size: 2.2rem; margin-bottom: 20px; color: var(--dark); }
+    .tech-text p { color: #666; font-size: 1rem; margin-bottom: 20px; }
+    
+    .tech-img { flex: 1; height: 400px; border-radius: 8px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+    .tech-img img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* --- AI STUDIO --- */
+    .ai-studio { background: var(--dark); color: white; padding: 100px 10%; text-align: center; }
+    .ai-card { background: #111; padding: 40px; border: 1px solid var(--primary); border-radius: 12px; max-width: 800px; margin: auto; }
+    .copy-box { background: #000; padding: 20px; border-radius: 8px; color: var(--primary); font-size: 0.9rem; font-style: italic; margin: 20px 0; cursor: pointer; border: 1px solid #333; }
+
+    /* --- AVIS CLIENTS --- */
+    .reviews { padding: 100px 5%; background: var(--grey); text-align: center; }
+    .review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
+    .review-card { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); text-align: left; }
+    .stars { color: #f1c40f; margin-bottom: 15px; }
+
+    /* --- MAPS --- */
+    .map-section { height: 450px; width: 100%; background: #eee; border-top: 5px solid var(--primary); }
+
+    /* --- CTA --- */
+    .cta { padding: 80px 5%; text-align: center; background: var(--white); color: var(--dark); }
+    .btn-gold { padding: 20px 40px; background: var(--primary); color: white; text-decoration: none; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; display: inline-block; margin-top: 20px; }
+
+    footer { padding: 50px 5%; background: #000; color: white; text-align: center; font-size: 0.7rem; opacity: 0.5; letter-spacing: 2px; }
+
+    @media (max-width: 768px) {
+        .tech-row, .tech-row.reverse { flex-direction: column; text-align: center; }
+        .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#" class="logo">JANAN</a>
+    <div class="nav-links">
+        <a href="#expertise" class="nav-link">Expertise</a>
+        <a href="#ia" class="nav-link">Studio IA</a>
+        <a href="#avis" class="nav-link">Avis</a>
+    </div>
+    <a href="https://wa.me/33758494003" class="nav-btn">CONTACT</a>
+  </nav>
+
+  <section class="hero">
+    <p>Artisan d'Exception</p>
+    <h1>Rénovation Totale <br>& Maîtrise d'Œuvre.</h1>
+  </section>
+
+  <section class="technical" id="expertise">
+    <span class="label">Nos Corps d'État</span>
+
+    <div class="tech-row">
+        <div class="tech-text">
+            <h3>Plomberie Technique</h3>
+            <p>Nous réalisons des installations sanitaires durables. Réseaux en cuivre façonnés à la main, intégration de nourrices et modification des évacuations pour une fiabilité totale.</p>
+        </div>
+        <div class="tech-img">
+            <img src="https://images.pexels.com/photos/5691622/pexels-photo-5691622.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Plomberie">
+        </div>
+    </div>
+
+    <div class="tech-row reverse">
+        <div class="tech-text">
+            <h3>Électricité & Domotique</h3>
+            <p>Remise aux normes NF C 15-100. Installation de tableaux électriques divisionnaires et éclairage LED architectural pour un confort moderne.</p>
+        </div>
+        <div class="tech-img">
+            <img src="https://images.pexels.com/photos/257736/pexels-photo-257736.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Électricité">
+        </div>
+    </div>
+  </section>
+
+  <section class="ai-studio" id="ia">
+    <span class="label">Design Futuriste</span>
+    <h2>Studio IA : Visualisez votre projet</h2>
+    <div class="ai-card">
+        <p>Utilisez l'IA pour transformer votre pièce actuelle. Copiez cette consigne et utilisez-la sur l'IA de votre choix.</p>
+        <div class="copy-box" onclick="copyPrompt()">
+            "Transforme cette photo en un salon luxueux avec carrelage 120x120 anthracite, murs clairs et éclairage design."
+        </div>
+        <div style="display: flex; gap: 15px; justify-content: center; margin-top: 20px;">
+            <a href="https://designer.microsoft.com" target="_blank" class="nav-btn" style="background:#0078d4; flex:1;">Microsoft Designer</a>
+            <a href="https://chatgpt.com" target="_blank" class="nav-btn" style="background:#10a37f; flex:1;">ChatGPT</a>
+        </div>
+    </div>
+  </section>
+
+  <section class="reviews" id="avis">
+    <span class="label">Témoignages</span>
+    <h2>Ce que disent nos clients</h2>
+    <div class="review-grid">
+        <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <p><strong>"Travail d'orfèvre"</strong></p>
+            <p style="font-size: 0.9rem; color: #777;">Janan a transformé notre salle de bain. La plomberie encastrée et le carrelage XXL sont parfaits. Un vrai pro.</p>
+            <small style="display:block; margin-top:15px; color: var(--primary);">Marc D. - Avignon</small>
+        </div>
+        <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <p><strong>"Sérénité totale"</strong></p>
+            <p style="font-size: 0.9rem; color: #777;">Il a géré toute la rénovation électrique et le sol de notre cuisine. Délai respecté et chantier très propre.</p>
+            <small style="display:block; margin-top:15px; color: var(--primary);">Sophie L. - Villeneuve</small>
+        </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>Prêt à transformer votre patrimoine ?</h2>
+    <a href="https://wa.me/33758494003" class="btn-gold">Obtenir mon devis WhatsApp</a>
+  </section>
+
+  <div class="map-section">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2872.247161642398!2d4.821960315510651!3d43.9452099791118!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12b5edd8352a9f65%3A0xa466200d7ee43ea4!2s1%20Av.%20Gr%C3%A9goire%20XI%2C%2084000%20Avignon!5e0!3m2!1sfr!2sfr!4v1710000000000!5m2!1sfr!2sfr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+  </div>
+
+  <footer>
+    © 2026 JANAN RÉNOVATION • 1 Avenue Grégoire XI, Avignon • EXCELLENCE ARTISANALE
+  </footer>
+
+  <script>
+    function copyPrompt() {
+        const text = "Transforme cette photo en un salon luxueux avec carrelage 120x120 anthracite, murs clairs et éclairage design.";
+        navigator.clipboard.writeText(text);
+        alert("Consigne copiée ! Collez-la maintenant dans l'IA.");
+    }
+  </script>
+
+</body>
+</html>
