@@ -11,36 +11,53 @@
 
   <style>
     :root {
-      --primary: #c5a059; 
-      --accent: #8a6510;  
-      --dark: #121212;    
-      --light: #fdfcf8;   
+      --primary: #c5a059; /* Or Champagne */
+      --accent: #8a6510;  /* Or Bruni très sombre pour un max de contraste */
+      --dark: #121212;    /* Anthracite profond */
+      --light: #fdfcf8;   /* Fond de page Pierre/Beige clair */
       --white: #ffffff;
       --transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
     }
     
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Montserrat', sans-serif; background: var(--light); color: var(--dark); overflow-x: hidden; line-height: 1.8; }
+    
+    body { 
+      font-family: 'Montserrat', sans-serif; 
+      background: var(--light); 
+      color: var(--dark); 
+      overflow-x: hidden; 
+      line-height: 1.7; 
+      -webkit-font-smoothing: antialiased; 
+    }
 
+    /* --- RÉVÉLATION --- */
     .reveal { opacity: 0; transform: translateY(30px); transition: var(--transition); }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    /* --- NAV --- */
+    /* --- NAVIGATION ÉPURÉE --- */
     nav { 
       position: fixed; width: 100%; padding: 25px 5%; 
       display: flex; justify-content: space-between; align-items: center; 
-      z-index: 5000; transition: 0.4s;
+      z-index: 5000; transition: 0.4s ease;
     }
-    .nav-scrolled { background: rgba(255, 255, 255, 0.98); padding: 15px 5%; backdrop-filter: blur(10px); box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
-    .logo { font-family: 'Playfair Display'; font-size: 1.8rem; font-weight: 700; color: var(--dark); text-decoration: none; letter-spacing: 5px; }
-    .nav-contact { font-size: 0.7rem; font-weight: 900; color: var(--primary); text-decoration: none; border-bottom: 2px solid var(--primary); padding-bottom: 3px; text-transform: uppercase; }
+    .nav-scrolled { background: rgba(255, 255, 255, 0.98); padding: 15px 5%; backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+    
+    /* MODIFICATION : STYLE POUR LE LOGO IMAGE */
+    .logo-link img { height: 40px; width: auto; transition: 0.3s; }
+    .nav-scrolled .logo-link img { height: 35px; }
 
-    /* --- HERO --- */
+    .nav-contact { 
+      font-size: 0.7rem; font-weight: 900; color: var(--primary); 
+      text-decoration: none; border-bottom: 2px solid var(--primary); 
+      padding-bottom: 3px; text-transform: uppercase; letter-spacing: 1px;
+    }
+
+    /* --- HERO : VISIBILITÉ MAQUÉE --- */
     .hero {
       height: 100vh; width: 100%; position: relative;
       display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
-      background: linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05)), 
+      background: linear-gradient(rgba(255,255,255,0.05), rgba(255,255,255,0.05)), 
                   url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat;
       background-attachment: fixed;
     }
@@ -54,67 +71,66 @@
     /* --- PHILOSOPHIE --- */
     .section { padding: 120px 10%; text-align: center; max-width: 1000px; margin: auto; }
     .label { color: var(--primary); font-weight: 700; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 6px; margin-bottom: 30px; display: block; }
-    .section h2 { font-family: 'Playfair Display'; font-size: clamp(2rem, 5vw, 3.5rem); color: var(--dark); margin-bottom: 40px; }
+    .section h2 { font-family: 'Playfair Display'; font-size: clamp(2rem, 5vw, 3.5rem); color: var(--dark); margin-bottom: 40px; line-height: 1.2; }
+    .section p { font-size: 1.1rem; color: #444; font-weight: 300; }
 
-    /* --- PORTAILS : AMÉLIORÉS POUR LE CLIC --- */
-    .portal-instruction { background: var(--white); padding: 40px 0; text-align: center; border-top: 1px solid #eee; }
-    .portal-instruction p { font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; color: var(--primary); }
-
+    /* --- PORTAILS --- */
     .portals { display: flex; height: 100vh; width: 100%; background: var(--dark); }
     .portal { 
       position: relative; flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; 
       text-decoration: none; color: white; overflow: hidden; transition: var(--transition);
-      cursor: pointer;
     }
     .portal-bg { 
       position: absolute; top:0; left:0; width:100%; height:100%; 
-      background-size: cover; background-position: center; filter: brightness(0.4); 
+      background-size: cover; background-position: center; filter: brightness(0.5); 
       transition: var(--transition); z-index: 1;
     }
     .portal-content { z-index: 2; text-align: center; padding: 0 40px; }
-    .portal-content h2 { font-family: 'Playfair Display'; font-size: clamp(2.5rem, 5vw, 4.5rem); text-transform: uppercase; margin-bottom: 25px; letter-spacing: 2px; }
-    
-    .portal-btn { 
-        display: inline-block; padding: 18px 45px; border: 1px solid rgba(255,255,255,0.8); 
-        font-size: 0.75rem; font-weight: 900; letter-spacing: 4px; text-transform: uppercase; 
-        transition: 0.3s; position: relative;
-    }
-    /* Petite animation de flèche pour le clic */
-    .portal-btn span { display: inline-block; transition: 0.3s; }
-    .portal:hover .portal-btn span { transform: translateX(10px); }
-    .portal:hover .portal-btn { background: var(--white); color: var(--dark); border-color: var(--white); }
+    .portal-content h2 { font-family: 'Playfair Display'; font-size: clamp(2rem, 4vw, 4.5rem); text-transform: uppercase; margin-bottom: 25px; letter-spacing: 2px; }
+    .portal-btn { padding: 15px 40px; border: 1px solid white; font-size: 0.7rem; font-weight: 900; letter-spacing: 3px; text-transform: uppercase; }
 
-    /* --- RESTE DU SITE --- */
+    /* --- STUDIO IA --- */
     .ai-box { padding: 100px 10%; background: var(--white); text-align: center; }
     .ai-card { background: var(--light); padding: 50px; border-radius: 4px; border: 1px solid #eee; max-width: 800px; margin: auto; }
-    .copy-box { background: white; padding: 25px; border: 1px dashed var(--primary); border-radius: 4px; margin: 25px 0; cursor: pointer; color: #555; font-style: italic; }
+    .copy-box { background: white; padding: 25px; border: 1px dashed var(--primary); border-radius: 4px; margin: 25px 0; cursor: pointer; color: #555; font-style: italic; font-size: 0.9rem; }
+
+    /* --- AVIS --- */
     .reviews { padding: 100px 5%; background: var(--light); text-align: center; }
     .review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
-    .review-card { background: white; padding: 40px; border-radius: 4px; text-align: left; }
+    .review-card { background: white; padding: 40px; border-radius: 4px; text-align: left; box-shadow: 0 10px 30px rgba(0,0,0,0.02); }
+    .stars { color: #f1c40f; margin-bottom: 15px; }
+
+    /* --- STATS & MAP --- */
     .stats { display: flex; flex-wrap: wrap; background: var(--dark); color: white; padding: 80px 5%; text-align: center; }
     .stat-item { flex: 1 1 250px; padding: 20px; }
     .stat-item h3 { font-size: 2.5rem; color: var(--primary); margin-bottom: 10px; font-weight: 900; }
     .map-container { height: 500px; width: 100%; background: #eee; border-top: 2px solid var(--primary); }
+
+    /* --- FOOTER --- */
     footer { padding: 80px 5%; background: var(--white); text-align: center; border-top: 1px solid #eee; }
     .footer-logo { font-family: 'Playfair Display'; font-size: 2.5rem; color: var(--dark); text-decoration: none; display: block; margin-bottom: 20px; }
+    .footer-info { font-size: 0.7rem; letter-spacing: 3px; color: #999; text-transform: uppercase; }
 
+    /* --- MOBILE --- */
     @media (max-width: 900px) {
       .portals { flex-direction: column; height: auto; }
-      .portal { height: 65vh; width: 100%; border-bottom: 1px solid rgba(255,255,255,0.1); }
+      .portal { height: 60vh; width: 100%; border-bottom: 1px solid rgba(255,255,255,0.1); }
       .hero { background-attachment: scroll; }
       .hero h1 { font-size: 3.5rem; }
+      .section { padding: 80px 5%; }
     }
     @media (min-width: 901px) {
-      .portal:hover { flex: 1.5; }
+      .portal:hover { flex: 1.4; }
       .portal:hover .portal-bg { filter: brightness(0.7); scale: 1.05; }
+      .portal:hover .portal-btn { background: white; color: var(--dark); }
     }
   </style>
 </head>
 <body>
 
   <nav id="mainNav">
-    <a href="#" class="logo">JANAN</a>
-    <a href="tel:+33758494003" class="nav-contact">07 58 49 40 03</a>
+    <a href="#" class="logo-link"><img src="https://cdn.prod.website-files.com/67ae431da4a8aaaa9812f391/67ae43455db0a32a088c9dab_janan-carreleur-7-2.png" alt="Logo Janan"></a>
+    <a href="tel:+33758494003" class="nav-contact">Projet Urgent • 07 58 49 40 03</a>
   </nav>
 
   <section class="hero">
@@ -124,32 +140,27 @@
   </section>
 
   <section class="section reveal">
-    <span class="label">Signature Artisanale</span>
+    <span class="label">Expertise Signature</span>
     <h2>L'équilibre entre la matière <br>et la lumière.</h2>
     <p>Depuis deux décennies, JANAN redéfinit les codes de la rénovation à Avignon. Nous croyons qu'un espace réussi est une harmonie parfaite entre la technique pure et une esthétique intemporelle.</p>
   </section>
-
-  <div class="portal-instruction reveal">
-      <p>Sélectionnez votre univers</p>
-      <div style="width: 40px; height: 1px; background: var(--primary); margin: 15px auto;"></div>
-  </div>
 
   <section class="portals">
     <a href="carrelage.html" class="portal">
         <div class="portal-bg" style="background-image: url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=2000&auto=format&fit=crop');"></div>
         <div class="portal-content">
-            <span style="color:var(--primary); letter-spacing: 5px; text-transform: uppercase; font-size: 0.7rem; display: block; margin-bottom: 15px;">Maîtrise 01</span>
+            <span style="color:var(--primary); letter-spacing: 5px; text-transform: uppercase; font-size: 0.7rem; display: block; margin-bottom: 15px;">Univers 01</span>
             <h2>Carrelage</h2>
-            <div class="portal-btn">Entrer dans l'univers <span>→</span></div>
+            <div class="portal-btn">Expertise Sols</div>
         </div>
     </a>
 
     <a href="renovation.html" class="portal">
         <div class="portal-bg" style="background-image: url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto=format&fit=crop');"></div>
         <div class="portal-content">
-            <span style="color:var(--primary); letter-spacing: 5px; text-transform: uppercase; font-size: 0.7rem; display: block; margin-bottom: 15px;">Maîtrise 02</span>
+            <span style="color:var(--primary); letter-spacing: 5px; text-transform: uppercase; font-size: 0.7rem; display: block; margin-bottom: 15px;">Univers 02</span>
             <h2>Rénovation</h2>
-            <div class="portal-btn">Voir les projets <span>→</span></div>
+            <div class="portal-btn">Transformation</div>
         </div>
     </a>
   </section>
@@ -158,10 +169,10 @@
     <span class="label">Innovation</span>
     <h2>Visualisez votre projet</h2>
     <div class="ai-card">
-        <p>Copiez cette consigne et utilisez-la sur l'IA pour transformer votre pièce actuelle.</p>
+        <p>Copiez cette consigne et utilisez-la sur l'IA de votre choix pour transformer votre pièce actuelle.</p>
         <div class="copy-box" onclick="copyPrompt()">
             "Transforme cette photo en un espace luxueux avec carrelage grand format beige, murs blancs et éclairage design."
-            <br><small style="color:var(--primary); font-weight:700; display:block; margin-top:10px;">CLIQUEZ POUR COPIER LA CONSIGNE</small>
+            <br><small style="color:var(--primary); font-weight:700; display:block; margin-top:10px;">CLIQUEZ POUR COPIER</small>
         </div>
         <div style="display: flex; gap: 15px; justify-content: center;">
             <a href="https://designer.microsoft.com" target="_blank" style="background:#0078d4; color:white; padding:12px 25px; text-decoration:none; font-weight:700; font-size:0.7rem; text-transform:uppercase;">MS Designer</a>
@@ -194,7 +205,7 @@
   </section>
 
   <div class="map-container">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2872.646961448651!2d4.819717176662758!3d43.94602937108967!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12b5ed98352a9f95%3A0xa466200d7ee43ea4!2sJANAN%20Carreleur!5e0!3m2!1sfr!2sfr!4v1710000000000!5m2!1sfr!2sfr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    <iframe src="maps.google.com/233" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
   </div>
 
   <footer>
