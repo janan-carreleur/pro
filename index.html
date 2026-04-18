@@ -7,9 +7,9 @@
   <meta name="description" content="Artisan carreleur expert à Avignon. 20 ans d'expérience. Pose de carrelage intérieur, extérieur et rénovation. Devis au 07 58 49 40 03."/>
 
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-<link rel="shortcut icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="shortcut icon" href="favicon.ico">
   <link rel="manifest" href="site.webmanifest">
   
   <style>
@@ -24,26 +24,22 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Montserrat', sans-serif; color: var(--text); background-color: var(--white); scroll-behavior: smooth; overflow-x: hidden; }
 
-    /* --- NAVIGATION ADAPTÉE (PC & MOBILE) --- */
+    /* --- NAVIGATION --- */
     .nav {
       position: sticky; top: 0; z-index: 3000;
       background: white; padding: 10px 5%; 
       display: flex; justify-content: space-between; align-items: center;
       box-shadow: 0 2px 15px rgba(0,0,0,0.05);
     }
-    .nav img { height: 40px; width: auto; } /* Plus petit sur mobile par défaut */
+    .nav img { height: 40px; width: auto; }
     
-    .nav-links { 
-      display: flex; 
-      gap: 8px; /* Espace réduit pour que ça rentre sur mobile */
-      align-items: center; 
-    }
+    .nav-links { display: flex; gap: 8px; align-items: center; }
     
     .nav-shortcut { 
       text-decoration: none; 
       color: var(--dark); 
       font-weight: 700; 
-      font-size: 0.65rem; /* Taille adaptée pour mobile */
+      font-size: 0.65rem; 
       text-transform: uppercase; 
       border: 1px solid #ddd; 
       padding: 6px 10px; 
@@ -55,7 +51,7 @@
       text-decoration: none; font-weight: 700; font-size: 0.7rem; transition: 0.3s;
     }
 
-    /* --- HERO : LE DESIGN STYLÉ --- */
+    /* --- HERO --- */
     .hero {
       height: 90vh;
       background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.3)), 
@@ -109,7 +105,7 @@
     .trust-item span { display: block; color: var(--primary); font-weight: 900; font-size: 1.2rem; }
     .trust-item small { text-transform: uppercase; font-size: 0.6rem; color: #777; }
 
-    /* --- SECTIONS (INTRO & SERVICES) --- */
+    /* --- SECTIONS --- */
     .section { padding: 60px 10%; width: 100%; max-width: 1400px; margin: auto; }
     .intro { text-align: center; max-width: 900px; margin: auto; }
     .label { color: var(--primary); font-weight: 700; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 3px; display: block; margin-bottom: 15px; }
@@ -151,7 +147,6 @@
       box-shadow: 0 5px 20px rgba(0,0,0,0.3); z-index: 4000; text-decoration: none; font-size: 24px;
     }
 
-    /* --- MEDIA QUERIES --- */
     @media (max-width: 768px) {
       .nav img { height: 35px; }
       .nav-shortcut { font-size: 0.6rem; padding: 5px 8px; }
@@ -181,7 +176,7 @@
   </section>
 
   <div class="trust-bar">
-    <div class="trust-item"><span>20 ANS</span><small>D'expérience</small></div>
+    <div class="trust-item"><span>20 ANS</span><small>Expérience</small></div>
     <div class="trust-item"><span>AVIGNON</span><small>Secteur</small></div>
     <div class="trust-item"><span>PRO</span><small>Garanti</small></div>
   </div>
@@ -197,7 +192,7 @@
       </div>
       <strong>2. Choisissez votre IA :</strong>
       <div style="display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
-        <button onclick="openModal('https://gemini.google.com')" class="nav-btn" style="background:#4285F4; border:none; cursor:pointer; flex:1;">Gemini</button>
+        <button onclick="openModal('https://designer.microsoft.com')" class="nav-btn" style="background:#0078d4; border:none; cursor:pointer; flex:1;">Microsoft Designer</button>
         <button onclick="openModal('https://chatgpt.com')" class="nav-btn" style="background:#10a37f; border:none; cursor:pointer; flex:1;">ChatGPT</button>
       </div>
     </div>
