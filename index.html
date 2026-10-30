@@ -22,17 +22,45 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "HomeAndConstructionBusiness",
-    "name": "JANAN Carreleur",
-    "founder": "Moulay Janan",
-    "description": "Artisan carreleur à Avignon : salles de bain, sols, terrasses, margelles de piscine et rénovation.",
-    "telephone": "+33758494003",
-    "url": "https://www.janan-carreleur.fr/",
-    "image": "https://www.janan-carreleur.fr/images/margelles-piscine.jpg",
-    "logo": "https://www.janan-carreleur.fr/images/logo-janan.png",
-    "address": { "@type": "PostalAddress", "postalCode": "84000", "addressLocality": "Avignon", "addressCountry": "FR" },
-    "areaServed": ["Avignon","Montfavet","Le Pontet","Sorgues","Villeneuve-lès-Avignon","Morières-lès-Avignon","Vedène","Châteaurenard","Saint-Rémy-de-Provence","Luberon"],
-    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5", "reviewCount": "7" }
+    "@graph": [
+      {
+        "@type": "HomeAndConstructionBusiness",
+        "@id": "https://www.janan-carreleur.fr/#entreprise",
+        "name": "JANAN Carreleur",
+        "alternateName": "Moulay Janan - JANAN Carreleur",
+        "founder": "Moulay Janan",
+        "description": "Artisan carreleur à Avignon depuis plus de 20 ans : salles de bain, sols, terrasses, margelles de piscine et rénovation. Visite et devis gratuits.",
+        "telephone": "+33758494003",
+        "url": "https://www.janan-carreleur.fr/",
+        "image": "https://www.janan-carreleur.fr/images/margelles-piscine.jpg",
+        "logo": "https://www.janan-carreleur.fr/images/logo-janan.png",
+        "address": { "@type": "PostalAddress", "streetAddress": "1 Avenue Grégoire XI", "postalCode": "84000", "addressLocality": "Avignon", "addressRegion": "Provence-Alpes-Côte d'Azur", "addressCountry": "FR" },
+        "areaServed": ["Avignon","Montfavet","Le Pontet","Sorgues","Villeneuve-lès-Avignon","Morières-lès-Avignon","Vedène","Châteaurenard","Saint-Rémy-de-Provence","Luberon"],
+        "sameAs": ["https://www.pagesjaunes.fr/pros/60467221"],
+        "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5", "reviewCount": "7" },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Prestations de carrelage",
+          "itemListElement": [
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Carrelage de salle de bain", "url": "https://www.janan-carreleur.fr/carrelage-salle-de-bain-avignon.html" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Pose de carrelage de sol", "url": "https://www.janan-carreleur.fr/pose-carrelage-sol-avignon.html" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Carrelage de terrasse", "url": "https://www.janan-carreleur.fr/carrelage-terrasse-avignon.html" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Margelles et plage de piscine", "url": "https://www.janan-carreleur.fr/margelles-piscine-avignon.html" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Rénovation de carrelage", "url": "https://www.janan-carreleur.fr/renovation-carrelage-avignon.html" } }
+          ]
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Le devis est-il gratuit ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui. Je me déplace pour voir le chantier et je vous remets un devis détaillé, sans engagement." } },
+          { "@type": "Question", "name": "Combien coûte la pose de carrelage ?", "acceptedAnswer": { "@type": "Answer", "text": "Le prix dépend de l'état du sol, du format des carreaux, des découpes et de l'accès au chantier. Il est donné après la visite : vous avez un tarif juste, qui ne change pas en cours de route." } },
+          { "@type": "Question", "name": "Dois-je acheter le carrelage moi-même ?", "acceptedAnswer": { "@type": "Answer", "text": "Comme vous préférez. Vous pouvez choisir votre carrelage, ou je vous conseille sur le modèle, la quantité et la colle adaptés à votre pièce." } },
+          { "@type": "Question", "name": "Faut-il retirer l'ancien carrelage ?", "acceptedAnswer": { "@type": "Answer", "text": "Pas toujours. Selon l'état du sol, il est parfois possible de poser par-dessus. Je le vérifie lors de la visite." } },
+          { "@type": "Question", "name": "Travaillez-vous pour les professionnels ?", "acceptedAnswer": { "@type": "Answer", "text": "Oui : commerces, bureaux, garages et locaux associatifs. Le devis se fait de la même façon." } }
+        ]
+      }
+    ]
   }
   </script>
 
@@ -121,6 +149,8 @@
     .hero .wrap { position: relative; z-index: 1; padding-block: 0 9vh; }
     .hero .rating { display: inline-flex; align-items: center; gap: 10px; padding: 8px 16px; border-radius: 999px; background: rgba(255,255,255,.14); backdrop-filter: blur(8px); font-size: .9rem; font-weight: 700; margin-bottom: 26px; }
     .hero .rating span { color: #ffd36b; letter-spacing: 1px; }
+    .hero .loc { display: flex; align-items: center; gap: 12px; font-size: .78rem; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; color: var(--sand); margin-bottom: 18px; }
+    .hero .loc::before { content: ""; width: 28px; height: 1px; background: currentColor; }
     .hero h1 { font-size: clamp(3rem, 9vw, 8rem); max-width: 12ch; }
     .hero h1 em { color: var(--sand); }
     .hero p { max-width: 48ch; font-size: 1.15rem; margin: 24px 0 32px; color: rgba(255,255,255,.9); }
@@ -207,6 +237,14 @@
     .svc li { display: flex; gap: 12px; align-items: center; }
     .svc li::before { content: ""; width: 7px; height: 7px; background: var(--sand-dk); transform: rotate(45deg); flex: none; }
     .svc .btn { align-self: flex-start; }
+    .svc-cta { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+    .more-link { font-weight: 700; color: var(--sand-dk); text-underline-offset: 4px; }
+    .seo-txt { margin-top: 30px; color: var(--muted); max-width: 52ch; }
+    .seo-txt p { margin-bottom: 14px; }
+    .seo-txt a { color: var(--sand-dk); font-weight: 500; }
+    .f-nav { display: flex; flex-wrap: wrap; gap: 8px 20px; padding-top: 24px; }
+    .f-nav a { text-decoration: none; }
+    .f-nav a:hover { color: var(--cream); }
     .svcs .pics { position: relative; overflow: hidden; background: var(--deep); }
     .svcs .pics img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.06); transition: opacity .9s ease, transform 1.4s cubic-bezier(.2,.7,.2,1); }
     .svcs .pics img.on { opacity: 1; transform: none; }
@@ -442,6 +480,7 @@
       <source src="https://videos.pexels.com/video-files/4729560/4729560-sd_960_540_30fps.mp4" type="video/mp4">
     </video>
     <div class="wrap">
+      <p class="loc">Carreleur à Avignon • Vaucluse</p>
       <div class="rating"><span aria-hidden="true">★★★★★</span> 5/5 sur 7 avis clients</div>
       <h1>Le carrelage, <em>posé avec précision.</em></h1>
       <p>JANAN, carreleur à Avignon depuis plus de 20 ans. Salles de bain, sols, terrasses et piscines.</p>
@@ -516,10 +555,10 @@
     <div class="stage">
       <div class="txt">
         <div class="inner">
-          <article class="svc on"><span class="kicker">Prestations</span><span class="n">01 — Intérieur</span><h3>Salles de bain <em>et sols</em></h3><p>Faïence murale, douche à l'italienne, sols de séjour et de cuisine. Étanchéité sous carrelage dans les pièces d'eau.</p><ul><li>Grès cérame, imitation parquet ou pierre</li><li>Grands formats, plinthes et seuils</li></ul><a class="btn btn-navy" href="#devis">Demander un devis <span class="arr">→</span></a></article>
-          <article class="svc"><span class="kicker">Prestations</span><span class="n">02 — Extérieur</span><h3>Terrasses <em>et entrées</em></h3><p>Carrelage extérieur et pierre naturelle, avec la bonne pente pour l'écoulement de l'eau et une tenue au gel.</p><ul><li>Carrelage antidérapant</li><li>Pentes et caniveaux</li></ul><a class="btn btn-navy" href="#devis">Demander un devis <span class="arr">→</span></a></article>
-          <article class="svc"><span class="kicker">Prestations</span><span class="n">03 — Piscine</span><h3>Margelles <em>et plages</em></h3><p>Margelles en pierre ou en carrelage, joints soignés et finitions adaptées à l'eau et au soleil.</p><ul><li>Margelles en pierre</li><li>Plages de piscine</li></ul><a class="btn btn-navy" href="#devis">Demander un devis <span class="arr">→</span></a></article>
-          <article class="svc"><span class="kicker">Prestations</span><span class="n">04 — Rénovation</span><h3>Rénovation <em>et sur mesure</em></h3><p>Dépose de l'ancien carrelage, ragréage, reprise des supports, pose neuve. Plans de vasque et crédences.</p><ul><li>Dépose et ragréage</li><li>Plans et crédences carrelés</li></ul><a class="btn btn-navy" href="#devis">Demander un devis <span class="arr">→</span></a></article>
+          <article class="svc on"><span class="kicker">Prestations</span><span class="n">01 — Intérieur</span><h3>Salles de bain <em>et sols</em></h3><p>Faïence murale, douche à l'italienne, sols de séjour et de cuisine. Étanchéité sous carrelage dans les pièces d'eau.</p><ul><li>Grès cérame, imitation parquet ou pierre</li><li>Grands formats, plinthes et seuils</li></ul><div class="svc-cta"><a class="btn btn-navy" href="#devis">Demander un devis <span class="arr">→</span></a><a class="more-link" href="carrelage-salle-de-bain-avignon.html">En savoir plus</a></div></article>
+          <article class="svc"><span class="kicker">Prestations</span><span class="n">02 — Extérieur</span><h3>Terrasses <em>et entrées</em></h3><p>Carrelage extérieur et pierre naturelle, avec la bonne pente pour l'écoulement de l'eau et une tenue au gel.</p><ul><li>Carrelage antidérapant</li><li>Pentes et caniveaux</li></ul><div class="svc-cta"><a class="btn btn-navy" href="#devis">Demander un devis <span class="arr">→</span></a><a class="more-link" href="carrelage-terrasse-avignon.html">En savoir plus</a></div></article>
+          <article class="svc"><span class="kicker">Prestations</span><span class="n">03 — Piscine</span><h3>Margelles <em>et plages</em></h3><p>Margelles en pierre ou en carrelage, joints soignés et finitions adaptées à l'eau et au soleil.</p><ul><li>Margelles en pierre</li><li>Plages de piscine</li></ul><div class="svc-cta"><a class="btn btn-navy" href="#devis">Demander un devis <span class="arr">→</span></a><a class="more-link" href="margelles-piscine-avignon.html">En savoir plus</a></div></article>
+          <article class="svc"><span class="kicker">Prestations</span><span class="n">04 — Rénovation</span><h3>Rénovation <em>et sur mesure</em></h3><p>Dépose de l'ancien carrelage, ragréage, reprise des supports, pose neuve. Plans de vasque et crédences.</p><ul><li>Dépose et ragréage</li><li>Plans et crédences carrelés</li></ul><div class="svc-cta"><a class="btn btn-navy" href="#devis">Demander un devis <span class="arr">→</span></a><a class="more-link" href="renovation-carrelage-avignon.html">En savoir plus</a></div></article>
         </div>
         <div class="tabs" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
       </div>
@@ -689,6 +728,11 @@
           <li>Avignon</li><li>Montfavet</li><li>Le Pontet</li><li>Sorgues</li><li>Villeneuve-lès-Avignon</li>
           <li>Morières</li><li>Vedène</li><li>Châteaurenard</li><li>Saint-Rémy</li><li>Luberon</li>
         </ul>
+        <div class="seo-txt">
+          <h3 style="font-size:1.5rem;margin-bottom:12px">Votre carreleur à Avignon et dans le Vaucluse</h3>
+          <p>Installé à Avignon, JANAN pose du carrelage depuis plus de 20 ans chez les particuliers et les professionnels, dans un rayon d'environ 30 km : Montfavet, Le Pontet, Sorgues, Villeneuve-lès-Avignon, Vedène, Châteaurenard, Saint-Rémy-de-Provence et le Luberon.</p>
+          <p>Pour chaque chantier, c'est le même artisan qui vient voir, qui fait le devis et qui pose : <a href="carrelage-salle-de-bain-avignon.html">salle de bain et douche à l'italienne</a>, <a href="pose-carrelage-sol-avignon.html">carrelage de sol</a>, <a href="carrelage-terrasse-avignon.html">terrasses et pierre naturelle</a>, <a href="margelles-piscine-avignon.html">margelles de piscine</a> et <a href="renovation-carrelage-avignon.html">rénovation de carrelage</a>.</p>
+        </div>
       </div>
       <div class="faq rise">
         <details><summary>Le devis est-il gratuit ?</summary><p>Oui. Je me déplace pour voir le chantier et je vous remets un devis détaillé, sans engagement.</p></details>
@@ -708,6 +752,13 @@
       <a href="#top" class="brand"><img src="images/logo-janan.png" alt="" width="40" height="40"><b>JANAN</b></a>
       <div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn btn-sand" href="tel:+33758494003">07 58 49 40 03</a><a class="btn btn-wa" href="https://wa.me/33758494003" target="_blank" rel="noopener">WhatsApp</a></div>
     </div>
+    <nav class="f-nav" aria-label="Prestations">
+      <a href="carrelage-salle-de-bain-avignon.html">Carrelage de salle de bain</a>
+      <a href="pose-carrelage-sol-avignon.html">Pose de carrelage de sol</a>
+      <a href="carrelage-terrasse-avignon.html">Carrelage de terrasse</a>
+      <a href="margelles-piscine-avignon.html">Margelles et plage de piscine</a>
+      <a href="renovation-carrelage-avignon.html">Rénovation de carrelage</a>
+    </nav>
     <details class="legal">
       <summary>Mentions légales</summary>
       <p><strong>Éditeur :</strong> JANAN – Moulay Janan, entrepreneur individuel, Avignon (84). Téléphone : 07 58 49 40 03.</p>
@@ -1114,6 +1165,12 @@
   document.querySelectorAll('.mosaic button').forEach(c => c.addEventListener('click', () => { const i = c.querySelector('img'); lbImg.src = i.src; lbImg.alt = i.alt; opener = c; lb.classList.add('open'); lb.querySelector('button').focus(); }));
   lb.addEventListener('click', e => { if (e.target !== lbImg) closeLb(); });
   addEventListener('keydown', e => { if (e.key === 'Escape') { closeLb(); if (mnav.classList.contains('open')) setMenu(false); } });
+
+  // Arrivée depuis une page prestation : le type de travaux est déjà choisi
+  try {
+    const t = sessionStorage.getItem('janan-type');
+    if (t) { $('type').value = t; sessionStorage.removeItem('janan-type'); }
+  } catch (e) {}
 
   // Devis vers WhatsApp
   $('qf').addEventListener('submit', e => {
