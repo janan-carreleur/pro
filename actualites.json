@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "titre": "Chantier de cuisine",
+    "date": "2026-10-31",
+    "ville": "Avignon",
+    "photo": "images/actualites/img1582.jpeg",
+    "texte": "Voici mon dernier chantier "
+  }
+]
