@@ -388,6 +388,15 @@
     .f input:focus, .f select:focus, .f textarea:focus { outline: none; border-color: var(--sand); }
     .f .btn { width: 100%; margin-top: 4px; }
     .f .note { font-size: .84rem; color: #a39884; text-align: center; }
+    .f .note.err { color: #ffb4a8; }
+    form.f { position: relative; }
+    .f .btn-wa { margin-top: 0; }
+    .f .btn[disabled] { opacity: .6; cursor: wait; transform: none; }
+    .f-ok { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 30px; border-radius: 26px; background: rgba(10,12,16,.94); text-align: center; }
+    .f-ok[hidden] { display: none; }
+    .f-ok b { font-family: var(--serif); font-size: 1.7rem; font-weight: 600; color: var(--sand); }
+    .f-ok span { color: #ddd2bf; max-width: 34ch; }
+    .f-ok a { color: var(--sand); }
 
     /* ---------- FAQ ---------- */
     .faq-sec { background: var(--stone-2); }
@@ -740,7 +749,7 @@
       <div class="rise">
         <span class="kicker">Devis gratuit</span>
         <h2 class="h2">Un projet ? <em>Parlons-en.</em></h2>
-        <p class="lead" style="margin-top:18px">Votre demande s'ouvre dans WhatsApp, prête à envoyer. Vous pouvez y ajouter des photos de la pièce.</p>
+        <p class="lead" style="margin-top:18px">Remplissez le formulaire : votre demande m'arrive directement et je vous recontacte sous 24 h. Vous préférez WhatsApp ? Un bouton est prévu pour ça.</p>
         <a class="tel" href="tel:+33758494003">07 58 49 40 03</a>
         <small>Appel, SMS ou WhatsApp</small>
         <a class="mail" href="mailto:contact@janan-carreleur.fr">contact@janan-carreleur.fr</a>
@@ -756,9 +765,19 @@
           <div><label for="ville">Ville</label><input id="ville" required autocomplete="address-level2" placeholder="Ex. : Sorgues"></div>
           <div><label for="nom">Prénom</label><input id="nom" required autocomplete="given-name" placeholder="Votre prénom"></div>
         </div>
+        <div class="row">
+          <div><label for="tel">Téléphone</label><input id="tel" type="tel" required autocomplete="tel" placeholder="06 12 34 56 78"></div>
+          <div><label for="email">E-mail (facultatif)</label><input id="email" type="email" autocomplete="email" placeholder="vous@exemple.fr"></div>
+        </div>
         <div><label for="msg">Votre projet (facultatif)</label><textarea id="msg" rows="3" placeholder="Ex. : carrelage déjà acheté, travaux en mars"></textarea></div>
-        <button type="submit" class="btn btn-sand">Envoyer ma demande <span class="arr">→</span></button>
-        <p class="note">Rien n'est enregistré sur ce site.</p>
+        <input type="text" id="hp" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+        <button type="submit" class="btn btn-sand" id="qfSend">Envoyer ma demande <span class="arr">→</span></button>
+        <button type="button" class="btn btn-wa" id="qfWa">Ou l'envoyer sur WhatsApp</button>
+        <p class="note" id="qfNote">Votre demande est envoyée directement à JANAN. Rien n'est enregistré sur ce site.</p>
+        <div class="f-ok" id="qfOk" hidden>
+          <b>✓ Demande envoyée, merci !</b>
+          <span>Je vous recontacte sous 24 h. Urgent ? Appelez le <a href="tel:+33758494003">07 58 49 40 03</a>.</span>
+        </div>
       </form>
     </div>
   </section>
@@ -816,7 +835,7 @@
       <p><strong>Éditeur :</strong> JANAN – Moulay Janan, entrepreneur individuel, Avignon (84). Téléphone : 07 58 49 40 03. E-mail : contact@janan-carreleur.fr.</p>
       <p><strong>SIRET :</strong> 443 090 154 00024 – Activité : travaux de revêtement des sols et des murs (APE 43.33Z).</p>
       <p><strong>Hébergement :</strong> GitHub Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis.</p>
-      <p><strong>Données personnelles :</strong> le formulaire ne stocke aucune donnée sur ce site ; il ouvre WhatsApp avec votre message, que vous choisissez d'envoyer ou non.</p>
+      <p><strong>Données personnelles :</strong> le formulaire de devis ne stocke aucune donnée sur ce site. Votre demande (prénom, ville, téléphone, e-mail, projet) est transmise par e-mail à JANAN via le service FormSubmit, uniquement pour vous recontacter au sujet de votre devis. Si vous choisissez WhatsApp, le message s'ouvre dans WhatsApp et vous décidez de l'envoyer ou non.</p>
       <p><strong>Crédits :</strong> vidéo d'ouverture (Pexels), sous licence gratuite. L'effet marbre est un rendu illustratif. Toutes les autres photos sont des chantiers JANAN.</p>
     </details>
     <p class="credits">© 2026 JANAN Carreleur – Avignon</p>
@@ -1253,12 +1272,35 @@
     if (t) { $('type').value = t; sessionStorage.removeItem('janan-type'); }
   } catch (e) {}
 
-  // Devis vers WhatsApp
-  $('qf').addEventListener('submit', e => {
+  // Devis : envoyé directement par e-mail à contact@janan-carreleur.fr (service FormSubmit), ou sur WhatsApp au choix
+  const qf = $('qf'), v = id => $(id).value.trim();
+  const devisTexte = () => `Bonjour, je souhaite un devis.\nTravaux : ${v('type')}\nSurface : ${v('surf')}\nVille : ${v('ville')}\nPrénom : ${v('nom')}\nTéléphone : ${v('tel')}` + (v('email') ? `\nE-mail : ${v('email')}` : '') + (v('msg') ? `\nProjet : ${v('msg')}` : '');
+  const qfNote = (txt, err) => { $('qfNote').textContent = txt; $('qfNote').classList.toggle('err', !!err); };
+  qf.addEventListener('submit', async e => {
     e.preventDefault();
-    const v = id => $(id).value.trim();
-    const t = `Bonjour, je souhaite un devis.\nTravaux : ${v('type')}\nSurface : ${v('surf')}\nVille : ${v('ville')}\nPrénom : ${v('nom')}` + (v('msg') ? `\nProjet : ${v('msg')}` : '');
-    window.open('https://wa.me/33758494003?text=' + encodeURIComponent(t), '_blank', 'noopener');
+    if ($('hp').value) return;                                   // robot qui remplit le champ caché
+    const send = $('qfSend'); send.disabled = true; send.firstChild.textContent = 'Envoi en cours… ';
+    try {
+      const r = await fetch('https://formsubmit.co/ajax/contact@janan-carreleur.fr', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          _subject: `Demande de devis – ${v('type')} – ${v('ville')}`,
+          _template: 'table', _captcha: 'false', ...(v('email') ? { _replyto: v('email') } : {}),
+          'Travaux': v('type'), 'Surface': v('surf'), 'Ville': v('ville'), 'Prénom': v('nom'),
+          'Téléphone': v('tel'), 'E-mail': v('email') || '—', 'Projet': v('msg') || '—'
+        })
+      });
+      const d = await r.json().catch(() => ({}));
+      if (!r.ok || String(d.success) !== 'true') throw new Error(d.message || r.status);
+      $('qfOk').hidden = false; qf.reset();
+    } catch (err) {
+      qfNote("L'envoi n'a pas marché. Utilisez le bouton WhatsApp ou appelez le 07 58 49 40 03.", true);
+    } finally { send.disabled = false; send.firstChild.textContent = 'Envoyer ma demande '; }
+  });
+  $('qfWa').addEventListener('click', () => {
+    if (!qf.reportValidity()) return;
+    window.open('https://wa.me/33758494003?text=' + encodeURIComponent(devisTexte()), '_blank', 'noopener');
   });
 </script>
 </body>
