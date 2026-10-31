@@ -1,0 +1,36 @@
+# Pages CMS (app.pagescms.org) : ce que Moulay peut modifier depuis son téléphone.
+media:
+  input: images/actualites
+  output: images/actualites
+  rename: safe
+  extensions: [jpg, jpeg, png, webp]
+
+content:
+  - name: actualites
+    label: Actualités
+    description: Les derniers chantiers affichés sur la page d'accueil (les 6 plus récents).
+    type: file
+    path: actualites.json
+    format: json
+    list: true
+    fields:
+      - name: titre
+        label: Titre
+        type: string
+        required: true
+        description: "Exemple : Terrasse en pierre naturelle"
+      - name: date
+        label: Date du chantier
+        type: date
+        required: true
+      - name: ville
+        label: Ville
+        type: string
+        description: "Exemple : Sorgues"
+      - name: photo
+        label: Photo
+        type: image
+      - name: texte
+        label: Quelques mots
+        type: text
+        description: "Exemple : 45 m² de pierre naturelle posée avec une pente pour l'écoulement de l'eau."

@@ -12,6 +12,11 @@
   <meta property="og:image" content="https://www.janan-carreleur.fr/images/margelles-piscine.jpg">
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="JANAN">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="theme-color" content="#0a0c10">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -268,6 +273,19 @@
     .lightbox.open { display: flex; }
     .lightbox img { max-height: 86vh; border-radius: 14px; }
     .lightbox button { position: absolute; top: calc(16px + env(safe-area-inset-top, 0px)); right: calc(16px + env(safe-area-inset-right, 0px)); width: 50px; height: 50px; border-radius: 50%; border: 1px solid rgba(255,255,255,.4); background: rgba(255,255,255,.08); color: #fff; font-size: 1.5rem; cursor: pointer; }
+
+    /* ---------- ACTUALITÉS ---------- */
+    .news { background: var(--stone); }
+    .news .head { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; margin-bottom: 40px; }
+    .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+    .nw { background: var(--cream); border-radius: 22px; overflow: hidden; display: flex; flex-direction: column; transition: transform .3s, box-shadow .3s; }
+    .nw:hover { transform: translateY(-4px); box-shadow: 0 24px 50px -28px rgba(40,30,15,.4); }
+    .nw .ph { aspect-ratio: 4 / 3; background: var(--stone-2); overflow: hidden; }
+    .nw .ph img { width: 100%; height: 100%; object-fit: cover; }
+    .nw .bd { padding: 22px 24px 26px; }
+    .nw .meta { font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--sand-dk); }
+    .nw h3 { font-size: 1.45rem; margin: 8px 0 10px; }
+    .nw p { color: var(--muted); font-size: .98rem; white-space: pre-line; }
 
     /* ---------- AVANT / APRÈS ---------- */
     .ba-sec .head { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; margin-bottom: 40px; }
@@ -596,6 +614,17 @@
         <button type="button"><img src="images/terrasse-imitation-bois.jpg" alt="Terrasse et caniveau" loading="lazy"><span>Terrasse et caniveau</span></button>
         <button type="button"><img src="images/sol-couloir.jpg" alt="Sol de couloir" loading="lazy"><span>Sol de couloir</span></button>
       </div>
+    </div>
+  </section>
+
+  <!-- ACTUALITÉS : remplies depuis actualites.json (modifiable sur le téléphone avec Pages CMS) ; cachées tant qu'il n'y en a pas -->
+  <section class="sec news" id="actualites" hidden>
+    <div class="wrap">
+      <div class="head rise">
+        <div><span class="kicker">Actualités</span><h2 class="h2">Derniers <em>chantiers</em></h2></div>
+        <p class="lead">Les chantiers terminés récemment par JANAN, autour d'Avignon.</p>
+      </div>
+      <div class="news-grid" id="newsGrid"></div>
     </div>
   </section>
 
@@ -1170,6 +1199,25 @@
       }, { threshold: .6 });
       bo.observe(ba);
     });
+
+  // Actualités : lues dans actualites.json, les plus récentes d'abord
+  fetch('actualites.json', { cache: 'no-cache' }).then(r => r.ok ? r.json() : []).then(list => {
+    if (!Array.isArray(list) || !list.length) return;
+    const esc = s => String(s || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const fmt = d => { const t = new Date(d); return isNaN(t) ? '' : t.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' }); };
+    list.sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
+    $('newsGrid').innerHTML = list.slice(0, 6).map(n => `
+      <article class="nw">
+        ${n.photo ? `<div class="ph"><img src="${esc(String(n.photo).replace(/^\//, ''))}" alt="${esc(n.titre)}" loading="lazy"></div>` : ''}
+        <div class="bd">
+          <span class="meta">${esc([fmt(n.date), n.ville].filter(Boolean).join(' • '))}</span>
+          <h3>${esc(n.titre)}</h3>
+          ${n.texte ? `<p>${esc(n.texte)}</p>` : ''}
+        </div>
+      </article>`).join('');
+    $('actualites').hidden = false;
+    $('actualites').querySelectorAll('.rise').forEach(el => el.classList.add('in'));
+  }).catch(() => {});
 
   // Menu téléphone
   const mnav = $('mnav'), burger = $('burger');
